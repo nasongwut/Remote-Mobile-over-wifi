@@ -1,0 +1,30 @@
+# Gradle
+.gradle/
+.kotlin/
+build/
+app/build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Local configuration (machine-specific paths)
+local.properties
+
+# Build outputs and archives
+*.apk
+*.aab
+*.zip
+
+# Android Studio / IntelliJ
+.idea/
+*.iml
+captures/
+.externalNativeBuild/
+.cxx/
+
+# Debug and log files
+crash.txt
+users.txt
+*.log
+
+# OS
+.DS_Store
+Thumbs.db

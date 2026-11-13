@@ -41,26 +41,56 @@ No third-party libraries. The app uses only the Android SDK and the Kotlin stand
 
 - Two Android devices running Android 11 (API 30) or later
 - Both devices (and the computer, for browser control) on the same Wi-Fi network. Alternatively, connect the host to the controller's hotspot.
-- A Mac or Linux machine with Homebrew to build the APK
+- A Mac or Linux computer to build the APK (`setup-dev.sh` installs everything else)
 
 ---
 
+## Get the source
+
+```bash
+git clone https://github.com/nasongwut/Remote-Mobile-over-wifi.git
+cd Remote-Mobile-over-wifi
+```
+
 ## Build
 
-The included script installs everything it needs (JDK 17, Gradle, Android command-line tools, Android SDK 35) and builds the APK. Android Studio is not required.
+### 1. Set up the development environment (once)
+
+`setup-dev.sh` installs every tool and library needed to build, then runs a test build:
+
+| Component | Version |
+|---|---|
+| JDK | 17 |
+| Android command-line tools | latest (`sdkmanager`) |
+| Android SDK Platform | 35 |
+| Android SDK Build-Tools | 35.0.0 |
+| Android SDK Platform-Tools | latest (`adb`) |
+| Gradle (wrapper) | 8.9 |
+| Android Gradle Plugin / Kotlin | 8.7.3 / 2.0.21 (downloaded by Gradle) |
 
 ```bash
-cd MobileRemote
-./build.sh
+./setup-dev.sh
 ```
 
-The output is `MobileRemote.apk` in the project root.
+Supported hosts: macOS (Apple Silicon or Intel, using Homebrew) and Linux (Debian/Ubuntu using apt, Fedora using dnf). On Windows, use WSL2.
 
-To build and install on every phone connected over adb in one step:
+The script also writes `~/.mobileremote-env` (`JAVA_HOME`, `ANDROID_HOME`, `PATH`) and sources it from `~/.zshrc` / `~/.bashrc`, so `adb` works from any new terminal.
+
+| Option | Description |
+|---|---|
+| `./setup-dev.sh` | Full setup plus a verification build |
+| `./setup-dev.sh --no-build` | Setup only |
+| `./setup-dev.sh --doctor` | Check what is installed without changing anything |
+
+### 2. Build
 
 ```bash
-./build.sh install
+./build.sh            # build MobileRemote.apk
+./build.sh install    # build and install on every phone connected over adb
+./build.sh clean      # clean build
 ```
+
+The output is `MobileRemote.apk` in the project root. If the environment isn't set up yet, `build.sh` runs `setup-dev.sh` first.
 
 ## Install
 
@@ -76,9 +106,8 @@ Some regions require apps to come from a verified developer, and some devices bl
 4. Install for the main user only. This keeps copies out of Secure Folder and Dual Messenger profiles:
 
 ```bash
-ADB=/opt/homebrew/share/android-commandlinetools/platform-tools/adb
-$ADB devices
-$ADB install --user 0 -r MobileRemote.apk
+adb devices
+adb install --user 0 -r MobileRemote.apk
 ```
 
 To connect without a cable, use wireless debugging: run `adb pair <ip>:<port>`, then `adb connect <ip>:<port>`.
@@ -179,6 +208,54 @@ mDNS service types: `_mobileremote._tcp` (hosts sharing their screen) and `_mrfi
 
 ---
 
+## Development workflow
+
+### Quick start
+
+```bash
+git clone https://github.com/nasongwut/Remote-Mobile-over-wifi.git
+cd Remote-Mobile-over-wifi
+./setup-dev.sh          # install JDK, Android SDK, and Gradle (once)
+./build.sh install      # build and install on connected phones
+```
+
+### Commit and push
+
+`push.sh` stages every change, commits it, and pushes the current branch to `origin`:
+
+```bash
+./push.sh "Describe your change"
+```
+
+Or with plain git:
+
+```bash
+git add -A
+git commit -m "Describe your change"
+git push
+```
+
+### Contributing
+
+1. Fork the repository and create a branch: `git checkout -b feature/my-change`
+2. Make your changes, then run `./build.sh` to confirm the project still builds
+3. Commit and push the branch: `./push.sh "Add my change"`
+4. Open a pull request on GitHub
+
+### What is not committed
+
+`.gitignore` excludes generated and machine-specific files:
+
+| Ignored | Why |
+|---|---|
+| `.gradle/`, `.kotlin/`, `build/`, `app/build/` | Build caches and outputs |
+| `local.properties` | Contains the local Android SDK path |
+| `*.apk`, `*.aab`, `*.zip` | Build artifacts. Attach APKs to a GitHub Release instead. |
+| `.idea/`, `*.iml` | IDE settings |
+| `crash.txt`, `users.txt`, `*.log` | Debug output |
+
+`gradle/wrapper/gradle-wrapper.jar` **is** committed, so `./gradlew` works right after cloning.
+
 ## Project structure
 
 ```
@@ -193,6 +270,10 @@ app/src/main/java/com/mobileremote/app/
 └── Protocol.kt                    Ports, service types, wire protocol
 
 docs/                              Images used in this README
+setup-dev.sh                       Development environment setup
+build.sh                           Build / install script
+push.sh                            Commit and push helper
+.gitignore                         Files excluded from git
 ```
 
 ### Control protocol (port 8888)
