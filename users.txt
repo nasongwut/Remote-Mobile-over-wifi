@@ -1,0 +1,4 @@
+Users:
+	UserInfo{0:เจ้าของ:4c13} running
+	UserInfo{95:DUAL_APP:20001010} running
+	UserInfo{150:Secure Folder:61010} running

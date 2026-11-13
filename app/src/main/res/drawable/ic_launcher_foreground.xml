@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- เครื่องรีโมท (ซ้าย) ส่งสัญญาณไปยัง เครื่องถูกรีโมท (ขวา) -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp" android:height="108dp"
+    android:viewportWidth="108" android:viewportHeight="108">
+    <!-- เงา -->
+    <path android:fillColor="#33000000"
+        android:pathData="M29,38H43A4,4 0 0 1 47,42V72A4,4 0 0 1 43,76H29A4,4 0 0 1 25,72V42A4,4 0 0 1 29,38Z" />
+    <path android:fillColor="#33000000"
+        android:pathData="M67,38H81A4,4 0 0 1 85,42V72A4,4 0 0 1 81,76H67A4,4 0 0 1 63,72V42A4,4 0 0 1 67,38Z" />
+    <!-- ตัวเครื่อง -->
+    <path android:fillColor="#FFFFFFFF"
+        android:pathData="M28,36H42A4,4 0 0 1 46,40V70A4,4 0 0 1 42,74H28A4,4 0 0 1 24,70V40A4,4 0 0 1 28,36Z" />
+    <path android:fillColor="#FFFFFFFF"
+        android:pathData="M66,36H80A4,4 0 0 1 84,40V70A4,4 0 0 1 80,74H66A4,4 0 0 1 62,70V40A4,4 0 0 1 66,36Z" />
+    <!-- หน้าจอ -->
+    <path android:fillColor="#FF1E2A78"
+        android:pathData="M28.5,39.5H41.5A2,2 0 0 1 43.5,41.5V66.5A2,2 0 0 1 41.5,68.5H28.5A2,2 0 0 1 26.5,66.5V41.5A2,2 0 0 1 28.5,39.5Z" />
+    <path android:fillColor="#FF1E2A78"
+        android:pathData="M66.5,39.5H79.5A2,2 0 0 1 81.5,41.5V66.5A2,2 0 0 1 79.5,68.5H66.5A2,2 0 0 1 64.5,66.5V41.5A2,2 0 0 1 66.5,39.5Z" />
+    <!-- จุดโฮม -->
+    <path android:fillColor="#FFB8C2FF" android:pathData="M34,71.2a1,1 0 1,0 2,0a1,1 0 1,0 -2,0" />
+    <path android:fillColor="#FFB8C2FF" android:pathData="M72,71.2a1,1 0 1,0 2,0a1,1 0 1,0 -2,0" />
+    <!-- นิ้วแตะบนเครื่องรีโมท -->
+    <path android:fillColor="#FFFFC94A" android:pathData="M32.5,54a2.5,2.5 0 1,0 5,0a2.5,2.5 0 1,0 -5,0" />
+    <!-- คลื่นสัญญาณ -->
+    <path android:strokeColor="#FFFFFFFF" android:strokeWidth="2.6" android:strokeLineCap="round"
+        android:pathData="M51.5,50.5A5,5 0 0 1 51.5,57.5" />
+    <path android:strokeColor="#FFFFFFFF" android:strokeWidth="2.6" android:strokeLineCap="round"
+        android:pathData="M55,47A10,10 0 0 1 55,61" />
+    <!-- จุดแตะที่เกิดขึ้นบนเครื่องถูกรีโมท -->
+    <path android:strokeColor="#FFFFC94A" android:strokeWidth="1.6"
+        android:pathData="M68.5,54a4.5,4.5 0 1,0 9,0a4.5,4.5 0 1,0 -9,0" />
+    <path android:fillColor="#FFFFC94A" android:pathData="M71.2,54a1.8,1.8 0 1,0 3.6,0a1.8,1.8 0 1,0 -3.6,0" />
+</vector>

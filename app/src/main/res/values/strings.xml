@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Mobile Remote</string>
+    <string name="accessibility_label">Mobile Remote (รับคำสั่งควบคุม)</string>
+    <string name="accessibility_desc">อนุญาตให้เครื่องรีโมทแตะ ปัด และกดปุ่ม Back/Home บนเครื่องนี้ผ่าน Wi-Fi</string>
+</resources>
